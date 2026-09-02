@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🔮 VrzzN Hexcrawl — RPG Solo
 
 Site para jogar **RPG solo**, inspirado no oráculo **VrzzN** (por Wyrdlands).
@@ -13,25 +12,5 @@ Site para jogar **RPG solo**, inspirado no oráculo **VrzzN** (por Wyrdlands).
 - 🎬 **Nova aventura** — cria o gancho inicial completo.
 - 💾 **Save em arquivo** — baixe progresso (mundo, posição, grupo e diário) como `.json` e carregue depois.
 
-## Rodando localmente
-
-```bash
-npm install
-npm run dev
-```
-
-Abra http://localhost:5173
-
-## Publicando no GitHub Pages
-
-1. Crie um repositório no GitHub e suba este código na branch `main`.
-2. No GitHub, vá em **Settings → Pages → Source** e selecione **GitHub Actions**.
-3. O workflow já faz o build e publica automaticamente a cada push.
-
-> O `vite.config.js` usa `base: './'`, então funciona em qualquer nome de repositório.
-
 ## Créditos
-
 - Oráculo **VrzzN** criado por **Wyrdlands** (tabelas transcritas para uso digital).
-- Sistema de orçamento de XP e diretrizes de itens mágicos do **SRD 5.2 / DMG 2024** (Wizards of the Coast, licença CC-BY-4.0 onde aplicável).
-- Inspirado no **Solo Adventurer's Toolbox** (fantabulous-tech).
