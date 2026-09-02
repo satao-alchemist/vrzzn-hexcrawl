@@ -1,0 +1,4 @@
+node_modules
+dist
+teste-*.svg
+scripts/render-map.cjs
