@@ -35,7 +35,3 @@ Abra http://localhost:5173
 - Oráculo **VrzzN** criado por **Wyrdlands** (tabelas transcritas para uso digital).
 - Sistema de orçamento de XP e diretrizes de itens mágicos do **SRD 5.2 / DMG 2024** (Wizards of the Coast, licença CC-BY-4.0 onde aplicável).
 - Inspirado no **Solo Adventurer's Toolbox** (fantabulous-tech).
-=======
-# vrzzn-hexcrawl
-Vibecoded :(
->>>>>>> origin/main
