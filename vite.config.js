@@ -4,6 +4,6 @@ import react from '@vitejs/plugin-react'
 // base './' faz o build funcionar em qualquer subcaminho do GitHub Pages
 // (ex.: https://usuario.github.io/nome-do-repo/) sem precisar configurar nada.
 export default defineConfig({
-  base: './',
+  base: '/vrzzn-hexcrawl',
   plugins: [react()],
 })
