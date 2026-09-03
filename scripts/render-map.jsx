@@ -1,4 +1,3 @@
-// Script de teste: renderiza o mapa e o popup de zoom como SVG estático para inspeção visual
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import fs from 'fs'
@@ -20,7 +19,6 @@ mapa = mapa.replace(
 )
 fs.writeFileSync('teste-mapa.svg', mapa)
 
-// Popup de zoom de um hex de montanha, se houver
 const mont = mundo.hexes.find((h) => h.terreno === 'montanha') || mundo.hexes[0]
 const zoom = renderToStaticMarkup(
   <HexZoomModal hex={mont} seed="wyrdlands" onFechar={() => {}} onRegistrar={() => {}} onGerarEncontro={() => {}} />,

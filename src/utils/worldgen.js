@@ -4,7 +4,6 @@ import { TERRENOS, POIS, SUB_TERRENOS, LOCAIS_CIDADE_OBRIGATORIOS, LOCAIS_CIDADE
 export const HEX_SIZE = 42
 export const SQRT3 = Math.sqrt(3)
 
-// Layout flat-top (topo e base planos), colunas ímpares deslocadas (odd-q)
 export function hexCentro(col, row, size = HEX_SIZE) {
   return {
     x: size * 1.5 * col,
@@ -22,7 +21,7 @@ export function hexPontas(cx, cy, size = HEX_SIZE) {
 }
 
 export function coordLabel(col, row) {
-  return `${String(col).padStart(2, '0')}.${String(row).padStart(2, '0')}`
+  return `${String(col + 1).padStart(2, '0')}.${String(row + 1).padStart(2, '0')}`
 }
 
 function classificarTerreno(e, m) {
@@ -60,7 +59,6 @@ export function gerarMundo(seedStr, cols = 30, rows = 18) {
       let poi = null
       let isCidade = false
 
-      // Cidade central fixa — hub para voltar após expedições
       if (col === centroCol && row === centroRow) {
         terreno = 'cidade'
         poi = `Cidade de ${nomeCidade}`
@@ -108,19 +106,15 @@ function embaralhar(arr, rng) {
   return a
 }
 
-/** Cidade: 10 locais obrigatórios (1 de cada) + extras nos mini-hexes restantes */
 function gerarSubMapaCidade(hex, seedStr) {
   const rng = mulberry32(hashStr(`sub-cidade:${seedStr}:${hex.col},${hex.row}`))
 
-  // Centro = Praça com Mural de Avisos
   const praca = LOCAIS_CIDADE_OBRIGATORIOS.find((l) => l.nome.startsWith('Praça')) || LOCAIS_CIDADE_OBRIGATORIOS[0]
   const outrosObrigatorios = LOCAIS_CIDADE_OBRIGATORIOS.filter((l) => l !== praca)
 
-  // Posições exceto o centro
   const offsetsRestantes = SUB_OFFSETS.filter(([q, r]) => !(q === 0 && r === 0))
   const offsetsEmbaralhados = embaralhar(offsetsRestantes, rng)
 
-  // Extras suficientes para preencher o resto
   const extrasEmbaralhados = embaralhar(LOCAIS_CIDADE_EXTRA, rng)
   const obrigatoriosRestantes = embaralhar(outrosObrigatorios, rng)
 
@@ -142,7 +136,7 @@ function gerarSubMapaCidade(hex, seedStr) {
       q,
       r,
       tipo: { nome: tipo.nome, cor: tipo.cor, borda: tipo.borda },
-      poi: null, // nome do local já está em tipo.nome — evita repetição na legenda
+      poi: null,
       central,
     }
   })

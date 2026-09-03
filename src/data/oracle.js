@@ -1,7 +1,3 @@
-// Tabelas do oráculo VrzzN (por Wyrdlands) — transcritas para uso digital.
-// Tabelas D66: role 2d6, primeiro dado = dezena, segundo = unidade.
-
-// 18 entradas (pares 11-12 ... 65-66)
 export const EVENTOS = [
   { nome: 'Retorno Inesperado', texto: 'Algo ou alguém do passado volta à cena com impacto imediato.' },
   { nome: 'Chegada Repentina', texto: 'Um novo personagem, grupo ou criatura aparece no local.' },
@@ -41,7 +37,7 @@ export const GANCHO_ACONTECIMENTO = [
   'Emite calor sem razão', 'Imita sons conhecidos', 'Está ligado a algo maior',
 ]
 
-// Palavras aleatórias: 3 colunas (1-2 / 3-4 / 5-6), cada uma com 36 entradas D66
+
 export const PALAVRAS = [
   // Coluna 1-2
   ['Dúvida', 'Distração', 'Semente', 'Água', 'Poluição', 'Frio',
@@ -66,7 +62,6 @@ export const PALAVRAS = [
    'Raiz', 'Despertar', 'Nômade', 'Véu', 'Sussurro', 'Labirinto'],
 ]
 
-// 36 entradas D66
 export const CLIMA = [
   'Céu carregado e opressivo', 'Neblina rasteira cobre tudo', 'Calor sufocante e seco',
   'Vento gelado assobiando', 'Garoa persistente e fria', 'Ar parado e pesado',
@@ -82,7 +77,6 @@ export const CLIMA = [
   'Poeira cobrindo tudo ao redor', 'Flashes de luz sem som', 'Sombra parece se mover sozinha',
 ]
 
-// NPC — tabelas de 18 entradas (pares)
 export const NPC_TRACO = [
   'Misterioso', 'Arrogante', 'Medroso', 'Sarcástico', 'Sábio', 'Violento',
   'Manipulador', 'Eufórico', 'Doente', 'Sombrio', 'Fanático', 'Culpado',

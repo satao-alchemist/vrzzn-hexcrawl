@@ -1,13 +1,32 @@
 import { useMemo, useState, useEffect } from 'react'
 import { TERRENOS } from '../data/terrain'
-import { gerarSubMapa, axialParaPixel, hexPontas, coordLabel } from '../utils/worldgen'
+import { gerarSubMapa, coordLabel } from '../utils/worldgen'
 import OraclePanel from './OraclePanel'
 import DicePanel from './DicePanel'
 import Diary from './Diary'
 
 const VIZINHOS = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]]
 const SUB_SIZE = 52
-const CENTRO = 160
+const SQRT3 = Math.sqrt(3)
+
+const CENTRO_X = 240
+const CENTRO_Y = 220
+
+function hexPontasPointy(cx, cy, size) {
+  const pts = []
+  for (let i = 0; i < 6; i++) {
+    const ang = (Math.PI / 180) * (60 * i - 30)
+    pts.push(`${cx + size * Math.cos(ang)},${cy + size * Math.sin(ang)}`)
+  }
+  return pts.join(' ')
+}
+
+function axialParaPixelPointy(q, r, size) {
+  return {
+    x: size * SQRT3 * (q + r / 2),
+    y: size * 1.5 * r,
+  }
+}
 
 const ABAS_ZOOM = [
   { id: 'local', nome: '📍 Local' },
@@ -16,7 +35,6 @@ const ABAS_ZOOM = [
   { id: 'diario', nome: '📜 Diário' },
 ]
 
-/** Rótulo no estilo do mapa geral: 00.00 a partir de q,r (offset +2) */
 function subLabel(q, r) {
   return coordLabel(q + 2, r + 2)
 }
@@ -39,7 +57,6 @@ export default function HexZoomModal({
     return lista.map((s, i) => ({ ...s, label: subLabel(s.q, s.r), idx: i + 1 }))
   }, [hex, seed])
 
-  // pos null = ainda não escolheu de onde começar
   const [pos, setPos] = useState(null)
   const [visitados, setVisitados] = useState(() => new Set(visitadosIniciais))
   const [abaZoom, setAbaZoom] = useState('local')
@@ -113,11 +130,11 @@ export default function HexZoomModal({
 
         <div className="modal-corpo">
           <div className="zoom-mapa-area">
-            <svg viewBox="-80 -80 480 480" className="submapa-grande">
+            <svg viewBox="0 0 480 440" className="submapa-grande">
               {subs.map((s) => {
-                const p = axialParaPixel(s.q, s.r, SUB_SIZE)
-                const x = CENTRO + p.x
-                const y = CENTRO + p.y
+                const p = axialParaPixelPointy(s.q, s.r, SUB_SIZE)
+                const x = CENTRO_X + p.x
+                const y = CENTRO_Y + p.y
                 const jogador = pos && s.q === pos[0] && s.r === pos[1]
                 const alcancavel = !pos || ehVizinho(s)
                 const marcado = visitados.has(key(s))
@@ -129,7 +146,7 @@ export default function HexZoomModal({
                     style={{ cursor: alcancavel || !pos ? 'pointer' : 'default' }}
                   >
                     <polygon
-                      points={hexPontas(x, y, SUB_SIZE * 0.96)}
+                      points={hexPontasPointy(x, y, SUB_SIZE * 0.96)}
                       fill={s.tipo.cor}
                       stroke={jogador ? '#c0392b' : !pos ? '#f1c40f' : alcancavel ? '#f1c40f' : s.tipo.borda}
                       strokeWidth={jogador ? 3.5 : !pos || alcancavel ? 2.5 : 1.2}
@@ -247,7 +264,7 @@ export default function HexZoomModal({
                         />
                         <span>
                           <b>{s.label}</b> — {s.tipo.nome}
-                          {s.poi ? ` · ◆ ${s.poi}` : ''}
+                          {s.poi && s.poi !== s.tipo.nome ? ` · ◆ ${s.poi}` : ''}
                         </span>
                       </label>
                     </li>

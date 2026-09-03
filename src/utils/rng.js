@@ -1,5 +1,3 @@
-// RNG com seed + ruído de valor 2D (para geração procedural determinística)
-
 export function hashStr(str) {
   let h = 2166136261 >>> 0
   for (let i = 0; i < str.length; i++) {
@@ -33,7 +31,6 @@ function smooth(t) {
   return t * t * (3 - 2 * t)
 }
 
-// Ruído de valor 2D em [0,1]
 export function makeNoise2D(seed) {
   return function noise(x, y) {
     const xi = Math.floor(x)
@@ -50,7 +47,6 @@ export function makeNoise2D(seed) {
   }
 }
 
-// fBm (várias oitavas) para relevo mais natural
 export function fbm(noise, x, y, octaves = 4) {
   let value = 0
   let amplitude = 0.5
@@ -67,7 +63,7 @@ export function fbm(noise, x, y, octaves = 4) {
 
 export const d6 = (rng = Math.random) => 1 + Math.floor(rng() * 6)
 export const d66 = (rng = Math.random) => [d6(rng), d6(rng)]
-// índice 0-35 para tabelas de 36 entradas
+
 export const idx36 = ([a, b]) => (a - 1) * 6 + (b - 1)
-// índice 0-17 para tabelas de pares (11-12, 13-14, ...)
+
 export const idx18 = ([a, b]) => (a - 1) * 3 + Math.floor((b - 1) / 2)
